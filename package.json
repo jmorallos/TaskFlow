@@ -1,0 +1,17 @@
+{
+  "name": "taskflow",
+  "version": "1.0.0",
+  "description": "A full-stack project management SPA for learning professional web development patterns",
+  "private": true,
+  "scripts": {
+    "dev": "cd backend && npm run dev",
+    "start": "cd backend && npm start",
+    "db:migrate": "cd backend && npm run db:migrate",
+    "db:seed": "cd backend && npm run db:seed",
+    "db:reset": "cd backend && npm run db:reset",
+    "install:all": "npm install && cd backend && npm install"
+  },
+  "keywords": ["learning", "fullstack", "spa", "node", "postgres"],
+  "author": "",
+  "license": "MIT"
+}

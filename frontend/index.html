@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!--
+    SPA Architecture — why there's only one HTML file:
+
+    In a traditional multi-page app, each URL loads a new HTML file from the server.
+    In a SPA, the server always returns this one HTML file. JavaScript then:
+    1. Reads the URL
+    2. Renders the correct "page" by updating the DOM
+    3. Uses the History API (pushState) to change the URL without a full page reload
+
+    Benefits: faster navigation, shared state between pages, app-like feel.
+    Trade-offs: more complex JS, requires server config for direct URL access.
+  -->
+
+  <!-- Loading state shown before JS initializes -->
+  <div id="app-loading">
+    <div class="loading-spinner"></div>
+    <p>Loading TaskFlow...</p>
+  </div>
+
+  <!-- Navigation bar — hidden until auth is confirmed -->
+  <nav id="navbar" class="navbar hidden">
+    <div class="navbar-brand">
+      <a href="/" class="brand-link" data-link>
+        <span class="brand-icon">⚡</span>
+        <span class="brand-name">TaskFlow</span>
+      </a>
+    </div>
+    <div class="navbar-nav">
+      <a href="/dashboard" class="nav-link" data-link>Dashboard</a>
+      <a href="/projects" class="nav-link" data-link>Projects</a>
+    </div>
+    <div class="navbar-end">
+      <div class="user-menu" id="user-menu">
+        <button class="user-avatar-btn" id="user-avatar-btn" aria-label="User menu">
+          <span class="avatar" id="nav-avatar"></span>
+        </button>
+        <div class="dropdown-menu hidden" id="user-dropdown">
+          <div class="dropdown-header" id="dropdown-user-info"></div>
+          <div class="dropdown-divider"></div>
+          <a href="/profile" class="dropdown-item" data-link>Profile Settings</a>
+          <button class="dropdown-item dropdown-item--danger" id="logout-btn">
+            Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!--
+    #app is where all page content renders.
+    The router swaps out the innerHTML of this element on navigation.
+  -->
+  <main id="app"></main>
+
+  <!-- Toast notification container (outside #app so it persists between pages) -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!--
+    ES Modules: type="module" enables import/export syntax in the browser.
+    Scripts are automatically deferred (execute after DOM parse).
+    The browser caches modules separately from scripts.
+  -->
+  <script type="module" src="src/main.js"></script>
+
+</body>
+</html>
